@@ -4,11 +4,11 @@ Very basic and simple representation of Battleships with php7 and laravel.
 
 More info about the game: [Battleship_(game)](https://en.wikipedia.org/wiki/Battleship_(game))
 
-Install:
+#### Install:
 - clone the repo
 - composer install
 
-Screenshots:
+#### Screenshots:
 
 ![SS!](http://s30.postimg.org/li40c21i9/Screenshot_from_2016_03_04_02_03_38.png)
 
