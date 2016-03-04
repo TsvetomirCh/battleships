@@ -8,6 +8,16 @@ More info about the game: [Battleship_(game)](https://en.wikipedia.org/wiki/Batt
 - clone the repo
 - composer install
 
+####  Requirements:
+- PHP >= 7.0.0
+- OpenSSL PHP Extension
+- PDO PHP Extension
+- Mbstring PHP Extension
+- Tokenizer PHP Extension
+
+#### Tests
+- phpunit
+
 #### Screenshots:
 
 ![SS!](http://s30.postimg.org/li40c21i9/Screenshot_from_2016_03_04_02_03_38.png)
