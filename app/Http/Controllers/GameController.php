@@ -18,6 +18,8 @@ class GameController extends Controller
     }
 
     /**
+     * Create the game, grid and place the ships.
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function playAction()
@@ -28,15 +30,16 @@ class GameController extends Controller
             new Ship('Destroyer', 4)
         ];
 
-        $game = new Game();
-        $game->create($ships);
+        (new Game())->create($ships);
 
-        session(['ships' => $ships]);
-        session(['ships_sunk' => 0]);
-        return view("pages.play", compact('ships', $ships));
+        $this->setSession($ships, 0);
+
+        return view("pages.play", compact('ships'));
     }
 
     /**
+     * Perform ajax call with the shot.
+     * 
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
@@ -50,7 +53,7 @@ class GameController extends Controller
         $hit = false;
         $message = 'Miss!';
 
-        $totalShips = sizeof($ships);
+        $totalShips = count($ships);
 
         foreach($ships as $ship) {
             if ($ship->checkHit($shot)) {
@@ -64,13 +67,22 @@ class GameController extends Controller
             }
         }
 
-        session(['ships' => $ships]);
-        session(['ships_sunk' => $shipsSunk]);
+        $this->setSession($ships, $shipsSunk);
 
         if ($totalShips == $shipsSunk) {
             $message = 'GAME OVER!';
         }
 
         return response()->json(['hit' => $hit, 'message' => $message]);
+    }
+
+    /**
+     * @param array $ships
+     * @param integer $shipsSunk
+     */
+    protected function setSession($ships, $shipsSunk) 
+    {
+        session(['ships' => $ships]);
+        session(['ships_sunk' => $shipsSunk]);
     }
 }
